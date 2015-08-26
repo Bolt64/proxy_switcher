@@ -21,3 +21,10 @@ chmod +x proxy_autoconfig.py
 ```
 
 Add it to the startup applications list.
+
+## Usage
+To change on which network the proxy should set, open up the
+`proxy_autoconfig.py` file and edit the line that says
+```
+proxy_ssid = ["iiscwlan", "opbwlan"]
+```
