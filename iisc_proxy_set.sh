@@ -13,4 +13,4 @@ gsettings set org.gnome.system.proxy.https port "$PROXY_PORT"
 gsettings set org.gnome.system.proxy.ftp host "$FTP_PROXY_HOST"
 gsettings set org.gnome.system.proxy.ftp port "$PROXY_PORT"
 
-cp /home/bolt/Code/configs/proxy_settings_iiscwlan /home/bolt/.current_proxy
+#cp /home/bolt/Code/configs/proxy_settings_iiscwlan /home/bolt/.current_proxy

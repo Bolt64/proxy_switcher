@@ -2,11 +2,12 @@
 
 from commands import getoutput
 from time import sleep
+from os.path import expanduser
 import re
 
 proxy_ssid=["iiscwlan", "opbwlan"]
-proxy_set_script="/home/bolt/bin/iisc_proxy_set.sh"
-proxy_unset_script="/home/bolt/bin/proxy_unset.sh"
+proxy_set_script="./iisc_proxy_set.sh"
+proxy_unset_script="./proxy_unset.sh"
 checking_interval=2
 
 ssid_matcher=re.compile("ESSID:\"[\w]*\"")
@@ -22,7 +23,7 @@ def get_ssid():
 
 def main(interval=2):
     current_ssid=get_ssid()
-    test=open("/home/bolt/.proxy_log", "a")
+    test=open(expanduser("~/.proxy_log"), "a")
     if current_ssid and current_ssid in proxy_ssid:
         test.write("changing to iiscwlan\n")
         test.write(str(getoutput(proxy_set_script))+'\n')
@@ -32,7 +33,7 @@ def main(interval=2):
     test.close()
 
     while True:
-        test=open("/home/bolt/.proxy_log", "a")
+        test=open(expanduser("~/.proxy_log"), "a")
         if not current_ssid:
             test.write("Nothing detected\n")
         else:
