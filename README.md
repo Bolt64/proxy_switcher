@@ -8,3 +8,16 @@ switching between turning on proxy and turning it off.
 ## Platform
 In principle, it should work on any recent GNOME based linux distro, though it
 has only been tested on Ubuntu and Debian.
+
+## Installation
+Add this line to your bashrc
+```
+source $HOME/.current_proxy
+```
+
+Make the script executable by using chmod
+```
+chmod +x proxy_autoconfig.py
+```
+
+Add it to the startup applications list.
