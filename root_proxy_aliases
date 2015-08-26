@@ -1,0 +1,2 @@
+alias proxy_set="source /home/bolt/Code/configs/proxy_settings_iiscwlan"
+alias unset_proxy="source /home/bolt/Code/configs/proxy_settings_other"
