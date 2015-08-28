@@ -1,22 +1,39 @@
 #!/usr/bin/env python
 
+## Some necessary imports
+
 from __future__ import print_function
 from commands import getoutput
 from time import sleep
 from os.path import expanduser
 import os
 import re
+from datetime import datetime
+
+###
+
+## Configuration options
 
 script_location = os.path.dirname(os.path.realpath(__file__))
 
-proxy_ssid = ["iiscwlan", "opbwlan"]
-proxy_set_script = "bash {0}/iisc_proxy_set.sh".format(script_location)
-proxy_unset_script = "bash {0}/proxy_unset.sh".format(script_location)
-checking_interval = 2
-default_log_file = expanduser("~/.proxy_log")
+proxy_ssid = ["iiscwlan", "opbwlan"] # Add whatever SSIDs you want to use the proxy for
+proxy_set_script = "bash {0}/iisc_proxy_set.sh".format(script_location) # The script you want to run to turn on proxy
+proxy_unset_script = "bash {0}/proxy_unset.sh".format(script_location) # The script to turn off proxy
+checking_interval = 2 # The checking frequency in seconds.
+default_log_file = expanduser("~/.proxy_log") # Where the logging will happen.
 
-ssid_matcher=re.compile("ESSID:\"[\w]*\"")
+ssid_matcher=re.compile("ESSID:\"[\w]*\"") # A regular expression to match to the output of iwconfig.
 ssid_slice=slice(7, -1)
+
+## Logs the string to the log file and stdout.
+def log_output(string, log_file=default_log_file):
+    now = datetime.now()
+    timestamped_string = "[{0}:{1}:{2}-{3}/{4}/{5}] {6}".format(now.hour, now.minute, now.second, now.day, now.month, now.year, string)
+    file_to_write = open(log_file, "a")
+    file_to_write.write(timestamped_string)
+    print(timestamped_string, end="")
+    file_to_write.close()
+###
 
 def set_proxy():
     log_output(str(getoutput(proxy_set_script))+'\n')
@@ -33,12 +50,6 @@ def get_ssid():
         return result.string[result.start():result.end()][ssid_slice]
     else:
         return None
-
-def log_output(string, log_file=default_log_file):
-    file_to_write = open(log_file, "a")
-    file_to_write.write(string)
-    print(string, end="")
-    file_to_write.close()
 
 def main(interval=2):
     current_ssid=get_ssid()
