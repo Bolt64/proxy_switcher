@@ -9,6 +9,7 @@ from os.path import expanduser
 import os
 import re
 from datetime import datetime
+import process_lock as pl
 
 ###
 
@@ -77,4 +78,12 @@ def main(interval=2):
         current_ssid=new_ssid
 
 if __name__=="__main__":
-    main(checking_interval)
+    try:
+        import psutil
+        pid = os.getpid()
+        if not pl.process_is_running("proxy_autoconfig", [pid]):
+            main(checking_interval)
+        else:
+            print("Process already running.")
+    except ImportError:
+        main(checking_interval)

@@ -1,4 +1,4 @@
-# ProxyAutoSwitcher v0.01
+# ProxyAutoSwitcher v0.02
 
 ## About ProxyAutoSwitcher (PAS)
 PAS switches you proxies for you based on your WiFi ssid. It's useful when your
@@ -8,6 +8,10 @@ switching between turning on proxy and turning it off.
 ## Platform
 In principle, it should work on any recent GNOME based linux distro, though it
 has only been tested on Ubuntu and Debian.
+
+## Dependencies
+Thi script also optionally requires the [psutil](https://github.com/giampaolo/psutil)
+library.
 
 ## Installation
 Add this line to your bashrc
