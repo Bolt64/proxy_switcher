@@ -10,7 +10,7 @@ In principle, it should work on any recent GNOME based linux distro, though it
 has only been tested on Ubuntu and Debian.
 
 ## Dependencies
-Thi script also optionally requires the [psutil](https://github.com/giampaolo/psutil)
+This script also optionally requires the [psutil](https://github.com/giampaolo/psutil)
 library.
 
 ## Installation
